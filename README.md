@@ -1,4 +1,4 @@
-![banner](./assets/github-banner.png)
+![banner](./assets/GITBANNER.png)
 
 # 👋 Hi, I'm Yameen Bux
 
