@@ -1,16 +1,39 @@
-## Hi there 👋
+![banner](./assets/github-banner.png)
 
-<!--
-**yameenbux/YameenBux** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+# 👋 Hi, I'm Yameen Bux
 
-Here are some ideas to get you started:
+A Senior IT Infrastructure Engineer on a journey to becoming a Cloud & DevOps Contractor.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+I'm building hands-on expertise in:
+- ☁️ Cloud Platforms – **Azure** (certified), learning **AWS**
+- 🧱 Infrastructure as Code – **Terraform**
+- 🔧 Automation – **PowerShell**, **Azure CLI**
+- 🔄 CI/CD – GitHub Actions (in progress)
+- 📦 Containerisation – **Kubernetes** (in progress)
+
+---
+
+## 🚀 My Cloud Portfolio
+
+Check out my full cloud engineering portfolio here:  
+👉 [**cloud-portfolio repository**](https://github.com/yameenbux/cloud-portfolio)
+
+It contains:
+- Terraform projects (VM deployments, resource groups)
+- PowerShell scripts for automation
+- Folder structure for AWS, CI/CD & Kubernetes labs
+
+---
+
+## 🎯 My Goals
+
+- 🔓 Transition into **cloud contracting roles** in 2025
+- 🧠 Prove my capabilities with real, hands-on cloud work
+- 💼 Build a 6-figure career in the cloud space
+
+---
+
+## 📫 Let's Connect
+
+- 💼 [LinkedIn – Yameen Bux](https://www.linkedin.com/in/yameenbux/)
+- 🌐 [GitHub – @yameenbux](https://github.com/yameenbux)
