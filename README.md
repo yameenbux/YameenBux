@@ -2,7 +2,7 @@
 
 # 👋 Hi, I'm Yameen Bux
 
-A Senior IT Infrastructure Engineer on a journey to becoming a Cloud & DevOps Contractor.
+A Senior IT Infrastructure Engineer on a journey to becoming a Cloud & DevOps Engineer
 
 I'm building hands-on expertise in:
 - ☁️ Cloud Platforms – **Azure** (certified), learning **AWS**
@@ -27,9 +27,9 @@ It contains:
 
 ## 🎯 My Goals
 
-- 🔓 Transition into **cloud contracting roles** in 2025
+- 🔓 Transition into **cloud**
 - 🧠 Prove my capabilities with real, hands-on cloud work
-- 💼 Build a 6-figure career in the cloud space
+
 
 ---
 
