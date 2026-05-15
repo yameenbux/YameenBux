@@ -10,26 +10,12 @@ I'm building hands-on expertise in:
 - 🔧 Automation – **PowerShell**, **Azure CLI**
 - 🔄 CI/CD – GitHub Actions (in progress)
 - 📦 Containerisation – **Kubernetes** (in progress)
-
----
-
-## 🚀 My Cloud Portfolio
-
-Check out my full cloud engineering portfolio here:  
-👉 [**cloud-portfolio repository**](https://github.com/yameenbux/cloud-portfolio)
-
-It contains:
-- Terraform projects (VM deployments, resource groups)
-- PowerShell scripts for automation
-- Folder structure for AWS, CI/CD & Kubernetes labs
-
 ---
 
 ## 🎯 My Goals
 
 - 🔓 Transition into **cloud**
 - 🧠 Prove my capabilities with real, hands-on cloud work
-
 
 ---
 
