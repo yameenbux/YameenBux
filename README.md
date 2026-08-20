@@ -25,7 +25,7 @@ Live: [App](https://yameenbux.github.io/Taiyabah-Mosque-App/) · [Website](https
 
 ## 🎨 YSB Designs
 
-I productise the same standards through **YSB Designs** *(a trading name of YSB Ventures Ltd)* — fast, cloud-hosted websites for local businesses, built and maintained the way production software should be.
+I productise the same standards through **YSB Designs**  — fast, cloud-hosted websites for local businesses, built and maintained the way production software should be.
 → **[Portfolio](https://yameenbux.github.io/YameenBux/)**
 
 ---
