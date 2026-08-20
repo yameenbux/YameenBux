@@ -18,15 +18,15 @@ One project, four connected products for a Bolton community — designed, built 
 
 **Under the hood:** Cloudflare Workers (serverless edge backend) · OneSignal push · **CI/CD with GitHub Actions** · Python data pipeline · installable, offline-ready PWA · Hijri date + Qibla geolocation
 
-🔗 **[Full case study & web studio →](https://yameenbux.github.io/YameenBux/)**
+🔗 **[Full case study & web studio →](https://yameenbux.github.io/ysbdesignsportfolio/)**
 Live: [App](https://yameenbux.github.io/Taiyabah-Mosque-App/) · [Website](https://yameenbux.github.io/Taiyabah-Mosque-Website-Rebrand/) · [Signage](https://yameenbux.github.io/Taiyabah-Mosque-Interactive-Screens/timetable.html)
 
 ---
 
 ## 🎨 YSB Designs
 
-I productise the same standards through **YSB Designs**  — fast, cloud-hosted websites for local businesses, built and maintained the way production software should be.
-→ **[Portfolio](https://yameenbux.github.io/YameenBux/)**
+I productise the same standards through **YSB Designs** *(a trading name of YSB Ventures Ltd)* — fast, cloud-hosted websites for local businesses, built and maintained the way production software should be.
+→ **[Portfolio](https://yameenbux.github.io/ysbdesignsportfolio/)**
 
 ---
 
@@ -68,5 +68,5 @@ Ubuntu Server · Docker · Portainer · Immich · self-hosted UniFi · Tailscale
 ## 📫 Connect
 
 - 💼 [LinkedIn — Yameen Bux](https://www.linkedin.com/in/yameenbux/)
-- 🌐 [Portfolio — YSB Designs](https://yameenbux.github.io/YameenBux/)
+- 🌐 [Portfolio — YSB Designs](https://yameenbux.github.io/ysbdesignsportfolio/)
 - 🐙 [GitHub — @yameenbux](https://github.com/yameenbux)
