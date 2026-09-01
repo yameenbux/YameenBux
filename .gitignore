@@ -15,3 +15,7 @@ secrets.json
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Python bytecode, generated when a skill's scripts run
+__pycache__/
+*.py[cod]
