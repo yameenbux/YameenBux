@@ -1,0 +1,17 @@
+# MCP server config can carry API keys in plaintext headers.
+# `claude mcp add -s project` writes this file into the repo root.
+.mcp.json
+
+# Credentials
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+
+# Local Claude Code state
+.claude/settings.local.json
+
+# OS noise
+.DS_Store
+Thumbs.db
