@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yameen Bux Banner Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F2F5F8; --surface:#FFFFFF; --surface-2:#F7F9FB;
+    --ink:#0B1117; --muted:#5B6570; --line:#D5DCE3; --line-soft:#E4EAF0;
+    --accent:#0969DA; --accent-2:#1293AC;
+    --b-bg0:#FFFFFF; --b-bg1:#F3F6F9; --b-border:#D5DCE3;
+    --b-eyebrow:#5B6570; --b-name:#0B1117; --b-sub:#454E58;
+    --b-pill-bg:#FFFFFF; --b-pill-border:#D5DCE3; --b-pill-text:#2A323B;
+    --b-ring:0.20; --b-line:0.45; --b-link:0.24; --b-dot:0.88; --b-sweep:0.60; --b-glow:0.06;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#070A0F; --surface:#0D1117; --surface-2:#111823;
+      --ink:#E9EFF5; --muted:#7F8994; --line:#242C36; --line-soft:#1B222C;
+      --accent:#58A6FF; --accent-2:#4FD3D9;
+      --b-bg0:#0D1117; --b-bg1:#0F1621; --b-border:#242C36;
+      --b-eyebrow:#7F8994; --b-name:#E9EFF5; --b-sub:#A9B4BF;
+      --b-pill-bg:#151B23; --b-pill-border:#2A323C; --b-pill-text:#C4CDD7;
+      --b-ring:0.14; --b-line:0.36; --b-link:0.19; --b-dot:0.78; --b-sweep:0.55; --b-glow:0.16;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#070A0F; --surface:#0D1117; --surface-2:#111823;
+    --ink:#E9EFF5; --muted:#7F8994; --line:#242C36; --line-soft:#1B222C;
+    --accent:#58A6FF; --accent-2:#4FD3D9;
+    --b-bg0:#0D1117; --b-bg1:#0F1621; --b-border:#242C36;
+    --b-eyebrow:#7F8994; --b-name:#E9EFF5; --b-sub:#A9B4BF;
+    --b-pill-bg:#151B23; --b-pill-border:#2A323C; --b-pill-text:#C4CDD7;
+    --b-ring:0.14; --b-line:0.36; --b-link:0.19; --b-dot:0.78; --b-sweep:0.55; --b-glow:0.16;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:40px 24px 72px; display:flex; flex-direction:column; gap:28px}
+
+  .masthead{display:flex; flex-direction:column; gap:6px}
+  .kicker{
+    font-family:var(--mono); font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+  }
+  h1{margin:0; font-size:26px; line-height:1.25; font-weight:650; letter-spacing:-.01em; text-wrap:balance}
+  .lede{margin:0; color:var(--muted); max-width:64ch}
+
+  /* ---- live banner ---- */
+  .stage{background:transparent; line-height:0}
+  .stage svg{display:block; width:100%; height:auto}
+  .banner-text{font-family:var(--sans)}
+  .node,.edge,.hubdot{transition:none}
+  .pill-bg{fill:var(--b-pill-bg); stroke:var(--b-pill-border); stroke-width:1;
+           transition:stroke .18s ease, fill .18s ease}
+  .pill-tx{fill:var(--b-pill-text); transition:fill .18s ease}
+  .pill{cursor:pointer; outline:none}
+  @media (hover:hover) and (pointer:fine){
+    .pill:hover .pill-bg{stroke:var(--accent)}
+  }
+  .pill:focus-visible .pill-bg{stroke:var(--accent); stroke-width:2}
+  .pill[aria-pressed="true"] .pill-bg{stroke:var(--accent); stroke-width:1.6; fill:var(--surface-2)}
+  .pill[aria-pressed="true"] .pill-tx{fill:var(--accent)}
+
+  /* ---- entrance + ambient motion (mirrors the shipped SVG) ---- */
+  @keyframes rise{from{opacity:0;transform:translateY(var(--d))}to{opacity:1;transform:translateY(0)}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes draw{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes sweep{from{stroke-dashoffset:0}to{stroke-dashoffset:-615.8}}
+  .run .bar{animation:draw 520ms cubic-bezier(.23,1,.32,1) 80ms both}
+  .run .ey{--d:8px;animation:rise 460ms cubic-bezier(.23,1,.32,1) 170ms both}
+  .run .nm{--d:14px;animation:rise 540ms cubic-bezier(.23,1,.32,1) 240ms both}
+  .run .sb{--d:10px;animation:rise 500ms cubic-bezier(.23,1,.32,1) 330ms both}
+  .run .pill{--d:10px;animation:rise 440ms cubic-bezier(.23,1,.32,1) var(--pd) both}
+  .run .rings{animation:fade 900ms ease-out 560ms both}
+  .run .edges{animation:fade 900ms ease-out 640ms both}
+  .run .nodew{animation:fade 620ms ease-out var(--nd) both}
+  .run .hub{animation:fade 620ms ease-out 680ms both}
+  .sweep{stroke-dasharray:74 541.8; animation:sweep 7s linear 1.2s infinite both}
+  .pk{animation:var(--pk) linear var(--pkd) infinite both}
+  @keyframes pk0{0%{opacity:0;transform:translate(0,0)}14%,78%{opacity:.95}100%{opacity:0;transform:translate(-104px,-56px)}}
+  @keyframes pk1{0%{opacity:0;transform:translate(0,0)}14%,78%{opacity:.95}100%{opacity:0;transform:translate(82px,-68px)}}
+  @keyframes pk2{0%{opacity:0;transform:translate(0,0)}14%,78%{opacity:.95}100%{opacity:0;transform:translate(24px,86px)}}
+  @keyframes pk3{0%{opacity:0;transform:translate(0,0)}14%,78%{opacity:.95}100%{opacity:0;transform:translate(-120px,10px)}}
+
+  :root[data-motion="off"] .sweep,:root[data-motion="off"] .pk{display:none}
+  :root[data-motion="off"] .run .bar,:root[data-motion="off"] .run .ey,
+  :root[data-motion="off"] .run .nm,:root[data-motion="off"] .run .sb,
+  :root[data-motion="off"] .run .pill,:root[data-motion="off"] .run .rings,
+  :root[data-motion="off"] .run .edges,:root[data-motion="off"] .run .nodew,
+  :root[data-motion="off"] .run .hub{
+    animation:fade 320ms ease-out both; transform:none; clip-path:none;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .sweep,.pk{display:none}
+    .run .bar,.run .ey,.run .nm,.run .sb,.run .pill,.run .rings,.run .edges,
+    .run .nodew,.run .hub{animation:fade 320ms ease-out both;transform:none;clip-path:none}
+  }
+
+  /* ---- control rail ---- */
+  .rail{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+    padding:10px 12px; border:1px solid var(--line); border-radius:10px;
+    background:var(--surface); font-family:var(--mono); font-size:12px;
+  }
+  .rail .tag{color:var(--accent); font-weight:600; letter-spacing:.08em}
+  .rail .sep{flex:1}
+  button.ctl{
+    font:inherit; color:var(--ink); background:var(--surface-2);
+    border:1px solid var(--line); border-radius:7px; padding:5px 11px; cursor:pointer;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  button.ctl:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  @media (hover:hover) and (pointer:fine){ button.ctl:hover{border-color:var(--accent); color:var(--accent)} }
+  .hint{color:var(--muted)}
+
+  /* ---- evidence ---- */
+  .evidence{display:flex; flex-direction:column; gap:0; border:1px solid var(--line);
+            border-radius:12px; background:var(--surface); overflow:hidden}
+  .ev-head{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); padding:12px 18px; border-bottom:1px solid var(--line-soft);
+  }
+  .ev-row{
+    display:grid; grid-template-columns:190px 1fr; gap:18px; align-items:baseline;
+    padding:14px 18px; border-left:2px solid transparent;
+    border-bottom:1px solid var(--line-soft); transition:background .2s ease, border-color .2s ease;
+  }
+  .ev-row:last-child{border-bottom:0}
+  .ev-row[data-on="1"]{background:var(--surface-2); border-left-color:var(--accent)}
+  .ev-k{font-family:var(--mono); font-size:12.5px; font-weight:500; color:var(--ink)}
+  .ev-row[data-on="1"] .ev-k{color:var(--accent)}
+  .ev-v{color:var(--muted); font-size:14px}
+  @media (max-width:640px){ .ev-row{grid-template-columns:1fr; gap:4px} }
+
+  .note{
+    border:1px solid var(--line); border-left:2px solid var(--accent);
+    border-radius:0 12px 12px 0; background:var(--surface); padding:16px 20px;
+  }
+  .note h2{margin:0 0 6px; font-size:13px; font-family:var(--mono); font-weight:600;
+           letter-spacing:.1em; text-transform:uppercase; color:var(--accent)}
+  .note p{margin:0 0 8px; color:var(--muted); max-width:70ch}
+  .note p:last-child{margin-bottom:0}
+  code{font-family:var(--mono); font-size:12.5px; color:var(--ink);
+       background:var(--surface-2); border:1px solid var(--line-soft);
+       border-radius:4px; padding:1px 5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">Interactive build</div>
+    <h1>The profile banner, with the parts GitHub won't run</h1>
+    <p class="lede">The banner shipped to the README animates but cannot respond — pointer events never
+      reach an SVG loaded through <code>&lt;img&gt;</code>. This build is the same artwork with the
+      interaction layer attached: move the cursor across the network, and select any part of the stack
+      to see what it actually shipped.</p>
+  </header>
+
+  <div class="stage">
+    <svg id="banner" class="run" viewBox="0 0 1000 252" xmlns="http://www.w3.org/2000/svg"
+         aria-label="Yameen Bux — Senior IT Infrastructure Engineer. Cloud and DevOps: production systems, shipped and running.">
+      <defs>
+        <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="var(--b-bg0)"/><stop offset="1" stop-color="var(--b-bg1)"/>
+        </linearGradient>
+        <linearGradient id="acGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-2)"/>
+        </linearGradient>
+        <radialGradient id="glowGrad" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="var(--accent)" stop-opacity="var(--b-glow)"/>
+          <stop offset="1" stop-color="var(--accent)" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="fadeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="0.45" stop-color="#fff" stop-opacity="1"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+        </linearGradient>
+        <mask id="fadeMask"><rect x="640" y="0" width="360" height="252" fill="url(#fadeGrad)"/></mask>
+        <clipPath id="cardClip"><rect x="0.5" y="0.5" width="999" height="251" rx="14"/></clipPath>
+      </defs>
+
+      <g clip-path="url(#cardClip)">
+        <rect width="1000" height="252" fill="url(#bgGrad)"/>
+        <ellipse cx="872" cy="126" rx="262" ry="196" fill="url(#glowGrad)"/>
+        <g mask="url(#fadeMask)">
+          <g transform="translate(856,122)">
+            <g class="rings">
+              <circle r="58" fill="none" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-ring)"/>
+              <circle r="98" fill="none" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-ring)"/>
+              <circle r="138" fill="none" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-ring)"/>
+              <circle class="sweep" r="98" fill="none" stroke="var(--accent-2)" stroke-width="1.3"
+                      stroke-linecap="round" opacity="var(--b-sweep)"/>
+            </g>
+            <g class="edges" id="edges">
+              <line class="edge" data-n="0" x1="0" y1="0" x2="-104" y2="-56" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="1" x1="0" y1="0" x2="82"   y2="-68" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="2" x1="0" y1="0" x2="110"  y2="24"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="3" x1="0" y1="0" x2="24"   y2="86"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="4" x1="0" y1="0" x2="-84"  y2="64"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="5" x1="0" y1="0" x2="96"   y2="94"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="edge" data-n="6" x1="0" y1="0" x2="-120" y2="10"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-line)"/>
+              <line class="link" data-a="0" data-b="4" x1="-104" y1="-56" x2="-84" y2="64" stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-link)"/>
+              <line class="link" data-a="1" data-b="2" x1="82" y1="-68" x2="110" y2="24"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-link)"/>
+              <line class="link" data-a="3" data-b="5" x1="24" y1="86"  x2="96"  y2="94"  stroke="url(#acGrad)" stroke-width="1" opacity="var(--b-link)"/>
+            </g>
+            <g class="nodew" style="--nd:700ms"><circle class="node" data-i="0" cx="-104" cy="-56" r="2.8" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:760ms"><circle class="node" data-i="1" cx="82"   cy="-68" r="3.4" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:820ms"><circle class="node" data-i="2" cx="110"  cy="24"  r="2.5" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:880ms"><circle class="node" data-i="3" cx="24"   cy="86"  r="3.0" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:940ms"><circle class="node" data-i="4" cx="-84"  cy="64"  r="2.6" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:1000ms"><circle class="node" data-i="5" cx="96"  cy="94"  r="2.1" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <g class="nodew" style="--nd:1060ms"><circle class="node" data-i="6" cx="-120" cy="10" r="2.2" fill="url(#acGrad)" opacity="var(--b-dot)"/></g>
+            <circle class="pk" style="--pk:pk0 3.6s;--pkd:0.56s"  r="2.6" fill="var(--accent-2)"/>
+            <circle class="pk" style="--pk:pk1 4.2s;--pkd:1.66s"  r="2.6" fill="var(--accent-2)"/>
+            <circle class="pk" style="--pk:pk2 3.9s;--pkd:2.56s"  r="2.6" fill="var(--accent-2)"/>
+            <circle class="pk" style="--pk:pk3 4.6s;--pkd:3.46s"  r="2.6" fill="var(--accent-2)"/>
+            <g class="hub"><circle r="9" fill="url(#acGrad)" opacity="0.28"/><circle r="4.5" fill="url(#acGrad)"/></g>
+          </g>
+        </g>
+      </g>
+      <rect x="0.5" y="0.5" width="999" height="251" rx="14" fill="none" stroke="var(--b-border)" stroke-width="1"/>
+
+      <rect class="bar" x="56" y="41" width="3" height="81" rx="1.5" fill="url(#acGrad)"/>
+      <text class="ey banner-text" x="82" y="58"  textLength="349.3" font-size="13.5" font-weight="600" fill="var(--b-eyebrow)">SENIOR IT INFRASTRUCTURE ENGINEER</text>
+      <text class="nm banner-text" x="82" y="120" textLength="377.0" font-size="56" font-weight="700" fill="var(--b-name)">YAMEEN BUX</text>
+      <text class="sb banner-text" x="82" y="154" textLength="503.9" font-size="18.5" font-weight="400" fill="var(--b-sub)">Cloud &amp; DevOps — production systems, shipped and running</text>
+
+      <g class="pill" data-key="cloudflare" role="button" tabindex="0" aria-pressed="false"
+         aria-label="Cloudflare Workers — show what shipped with it" style="--pd:430ms">
+        <rect class="pill-bg" x="82" y="178" width="161.2" height="36" rx="18"/>
+        <text class="pill-tx banner-text" x="98" y="201.5" textLength="129.2" font-size="14.5" font-weight="500">Cloudflare Workers</text>
+      </g>
+      <g class="pill" data-key="actions" role="button" tabindex="0" aria-pressed="false"
+         aria-label="GitHub Actions — show what shipped with it" style="--pd:485ms">
+        <rect class="pill-bg" x="252.2" y="178" width="132.6" height="36" rx="18"/>
+        <text class="pill-tx banner-text" x="268.2" y="201.5" textLength="100.6" font-size="14.5" font-weight="500">GitHub Actions</text>
+      </g>
+      <g class="pill" data-key="powershell" role="button" tabindex="0" aria-pressed="false"
+         aria-label="PowerShell — show what shipped with it" style="--pd:540ms">
+        <rect class="pill-bg" x="393.8" y="178" width="108" height="36" rx="18"/>
+        <text class="pill-tx banner-text" x="409.8" y="201.5" textLength="76" font-size="14.5" font-weight="500">PowerShell</text>
+      </g>
+      <g class="pill" data-key="m365" role="button" tabindex="0" aria-pressed="false"
+         aria-label="Microsoft 365 — show what shipped with it" style="--pd:595ms">
+        <rect class="pill-bg" x="510.8" y="178" width="122.6" height="36" rx="18"/>
+        <text class="pill-tx banner-text" x="526.8" y="201.5" textLength="90.6" font-size="14.5" font-weight="500">Microsoft 365</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="rail">
+    <span class="tag">▸ BANNER</span>
+    <button class="ctl" id="replay" type="button">Replay entrance</button>
+    <button class="ctl" id="theme" type="button">Theme: system</button>
+    <button class="ctl" id="motion" type="button">Motion: on</button>
+    <span class="sep"></span>
+    <span class="hint" id="status">move the cursor over the network</span>
+  </div>
+
+  <section class="evidence" aria-label="What each part of the stack shipped">
+    <div class="ev-head">Selected stack — what it shipped</div>
+    <div class="ev-row" data-row="cloudflare">
+      <div class="ev-k">Cloudflare Workers</div>
+      <div class="ev-v">Serverless edge backend behind the Taiyabah Masjid PWA — prayer times, live audio streaming and push notifications.</div>
+    </div>
+    <div class="ev-row" data-row="actions">
+      <div class="ev-k">GitHub Actions</div>
+      <div class="ev-v">CI/CD deploying the app, the public website and the in-building signage builds.</div>
+    </div>
+    <div class="ev-row" data-row="powershell">
+      <div class="ev-k">PowerShell</div>
+      <div class="ev-v">Automates the hybrid estate day to day — Exchange, Entra ID and Intune administration.</div>
+    </div>
+    <div class="ev-row" data-row="m365">
+      <div class="ev-k">Microsoft 365</div>
+      <div class="ev-v">Hybrid Microsoft 365 and Exchange environments run in production, alongside Active Directory and task-sequence imaging.</div>
+    </div>
+  </section>
+
+  <div class="note">
+    <h2>Why the README version can't do this</h2>
+    <p>GitHub serves README images through its camo proxy and renders them in an <code>&lt;img&gt;</code>.
+      A browser loads SVG there in <em>secure animated mode</em>: declarative CSS animation runs, but
+      scripting is disabled and pointer events never reach the image. So the shipped banner keeps every
+      animation on this page and drops only the cursor response — the one thing that needs a live document.</p>
+    <p>Inside a README the achievable maximum is an animated banner wrapped in a link, which is what
+      <code>assets/banner-dark.svg</code> and <code>assets/banner-light.svg</code> do. This file is
+      standalone: drop it on any page you control — a GitHub Pages site, for instance — and the full
+      interaction layer works.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var svg = document.getElementById('banner');
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- cursor-reactive network ---------- */
+  var nodes = [].slice.call(svg.querySelectorAll('.node')).map(function(el){
+    return { el:el, bx:+el.getAttribute('cx'), by:+el.getAttribute('cy'),
+             br:+el.getAttribute('r'), x:0, y:0, tx:0, ty:0, g:0, tg:0 };
+  });
+  var edges = [].slice.call(svg.querySelectorAll('.edge'));
+  var links = [].slice.call(svg.querySelectorAll('.link'));
+  var HUB = {x:856, y:122}, RADIUS = 96, PULL = 7;
+  var cursor = null, raf = null;
+
+  function toLocal(evt){
+    var m = svg.getScreenCTM();
+    if(!m) return null;
+    var p = svg.createSVGPoint();
+    p.x = evt.clientX; p.y = evt.clientY;
+    var q = p.matrixTransform(m.inverse());
+    return { x:q.x - HUB.x, y:q.y - HUB.y };
+  }
+
+  function frame(){
+    var moving = false;
+    for(var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      n.x += (n.tx - n.x) * 0.16;
+      n.y += (n.ty - n.y) * 0.16;
+      n.g += (n.tg - n.g) * 0.16;
+      if(Math.abs(n.tx-n.x)>0.05 || Math.abs(n.ty-n.y)>0.05 || Math.abs(n.tg-n.g)>0.004) moving = true;
+      var cx = n.bx + n.x, cy = n.by + n.y;
+      n.el.setAttribute('cx', cx.toFixed(2));
+      n.el.setAttribute('cy', cy.toFixed(2));
+      n.el.setAttribute('r', (n.br + n.g * 2.2).toFixed(2));
+      n.el.style.opacity = Math.min(1, 0.78 + n.g * 0.9);
+    }
+    for(var e=0;e<edges.length;e++){
+      var t = nodes[+edges[e].getAttribute('data-n')];
+      edges[e].setAttribute('x2', (t.bx + t.x).toFixed(2));
+      edges[e].setAttribute('y2', (t.by + t.y).toFixed(2));
+      edges[e].style.opacity = '';
+      if(t.g > 0.01) edges[e].style.opacity = Math.min(1, 0.36 + t.g * 0.75);
+    }
+    for(var l=0;l<links.length;l++){
+      var a = nodes[+links[l].getAttribute('data-a')], b = nodes[+links[l].getAttribute('data-b')];
+      links[l].setAttribute('x1', (a.bx + a.x).toFixed(2));
+      links[l].setAttribute('y1', (a.by + a.y).toFixed(2));
+      links[l].setAttribute('x2', (b.bx + b.x).toFixed(2));
+      links[l].setAttribute('y2', (b.by + b.y).toFixed(2));
+    }
+    raf = moving ? requestAnimationFrame(frame) : null;
+  }
+  function kick(){ if(!raf) raf = requestAnimationFrame(frame); }
+
+  function retarget(){
+    for(var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      if(!cursor){ n.tx = n.ty = n.tg = 0; continue; }
+      var dx = cursor.x - n.bx, dy = cursor.y - n.by;
+      var d = Math.sqrt(dx*dx + dy*dy);
+      if(d > RADIUS){ n.tx = n.ty = n.tg = 0; continue; }
+      var f = 1 - d / RADIUS;
+      n.tg = f;
+      if(reduce.matches || root.getAttribute('data-motion') === 'off'){ n.tx = n.ty = 0; }
+      else { n.tx = (dx / (d || 1)) * PULL * f; n.ty = (dy / (d || 1)) * PULL * f; }
+    }
+    kick();
+  }
+
+  svg.addEventListener('pointermove', function(evt){
+    if(evt.pointerType === 'touch') return;
+    cursor = toLocal(evt); retarget();
+  });
+  svg.addEventListener('pointerleave', function(){ cursor = null; retarget(); });
+
+  /* ---------- stack pills reveal their evidence ---------- */
+  var pills = [].slice.call(svg.querySelectorAll('.pill'));
+  var rows = [].slice.call(document.querySelectorAll('.ev-row'));
+  var status = document.getElementById('status');
+
+  function select(key){
+    pills.forEach(function(p){
+      p.setAttribute('aria-pressed', p.getAttribute('data-key') === key ? 'true' : 'false');
+    });
+    rows.forEach(function(r){
+      if(r.getAttribute('data-row') === key) r.setAttribute('data-on','1');
+      else r.removeAttribute('data-on');
+    });
+    var on = pills.filter(function(p){ return p.getAttribute('aria-pressed') === 'true'; })[0];
+    status.textContent = on ? on.getAttribute('data-key') + ' selected' : 'move the cursor over the network';
+  }
+  pills.forEach(function(p){
+    var key = p.getAttribute('data-key');
+    p.addEventListener('click', function(){
+      select(p.getAttribute('aria-pressed') === 'true' ? null : key);
+    });
+    p.addEventListener('keydown', function(evt){
+      if(evt.key === 'Enter' || evt.key === ' '){
+        evt.preventDefault();
+        select(p.getAttribute('aria-pressed') === 'true' ? null : key);
+      }
+    });
+  });
+
+  /* ---------- controls ---------- */
+  document.getElementById('replay').addEventListener('click', function(){
+    svg.classList.remove('run');
+    void svg.getBoundingClientRect();
+    svg.classList.add('run');
+  });
+
+  var themes = ['system','light','dark'], ti = 0;
+  var themeBtn = document.getElementById('theme');
+  themeBtn.addEventListener('click', function(){
+    ti = (ti + 1) % themes.length;
+    if(themes[ti] === 'system') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', themes[ti]);
+    themeBtn.textContent = 'Theme: ' + themes[ti];
+  });
+
+  var motionOn = true;
+  var motionBtn = document.getElementById('motion');
+  motionBtn.addEventListener('click', function(){
+    motionOn = !motionOn;
+    if(motionOn) root.removeAttribute('data-motion');
+    else root.setAttribute('data-motion','off');
+    motionBtn.textContent = 'Motion: ' + (motionOn ? 'on' : 'off');
+    retarget();
+  });
+})();
+</script>
+</body>
+</html>
