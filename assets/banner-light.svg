@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="252" viewBox="0 0 1000 252" role="img" aria-label="Yameen Bux — Senior IT Infrastructure Engineer, Cloud and DevOps">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F3F6F9"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0969DA"/><stop offset="1" stop-color="#1293AC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#0969DA" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#0969DA" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="fademask"><rect x="640" y="0" width="360" height="252" fill="url(#fade)"/></mask>
+    <clipPath id="card"><rect x="0.5" y="0.5" width="999" height="251" rx="14"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#card)">
+    <rect width="1000" height="252" fill="url(#bg)"/>
+    <ellipse cx="872" cy="126" rx="262" ry="196" fill="url(#glow)"/>
+    <g mask="url(#fademask)">
+      <circle cx="856" cy="122" r="58" fill="none" stroke="url(#accent)" stroke-width="1" opacity="0.20"/>
+      <circle cx="856" cy="122" r="98" fill="none" stroke="url(#accent)" stroke-width="1" opacity="0.20"/>
+      <circle cx="856" cy="122" r="138" fill="none" stroke="url(#accent)" stroke-width="1" opacity="0.20"/>
+      <line x1="856" y1="122" x2="752" y2="66" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="938" y2="54" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="966" y2="146" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="880" y2="208" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="772" y2="186" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="952" y2="216" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="856" y1="122" x2="736" y2="132" stroke="url(#accent)" stroke-width="1" opacity="0.45"/>
+      <line x1="752" y1="66" x2="772" y2="186" stroke="url(#accent)" stroke-width="1" opacity="0.24"/>
+      <line x1="938" y1="54" x2="966" y2="146" stroke="url(#accent)" stroke-width="1" opacity="0.24"/>
+      <line x1="880" y1="208" x2="952" y2="216" stroke="url(#accent)" stroke-width="1" opacity="0.24"/>
+      <circle cx="752" cy="66" r="2.8" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="938" cy="54" r="3.4" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="966" cy="146" r="2.5" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="880" cy="208" r="3.0" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="772" cy="186" r="2.6" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="952" cy="216" r="2.1" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="736" cy="132" r="2.2" fill="url(#accent)" opacity="0.88"/>
+      <circle cx="856" cy="122" r="9" fill="url(#accent)" opacity="0.28"/>
+      <circle cx="856" cy="122" r="4.5" fill="url(#accent)"/>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="999" height="251" rx="14" fill="none" stroke="#D5DCE3" stroke-width="1"/>
+
+  <rect x="56" y="41" width="3" height="81" rx="1.5" fill="url(#accent)"/>
+
+  <text x="82" y="58" textLength="349.3" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="13.5" font-weight="600" fill="#5B6570">SENIOR IT INFRASTRUCTURE ENGINEER</text>
+  <text x="82" y="120" textLength="377.0" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="56.0" font-weight="700" fill="#0B1117">YAMEEN BUX</text>
+  <text x="82" y="154" textLength="503.9" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="18.5" font-weight="400" fill="#454E58">Cloud &amp; DevOps — production systems, shipped and running</text>
+
+  <rect x="82" y="178" width="161.2" height="36" rx="18.0" fill="#FFFFFF" stroke="#D5DCE3" stroke-width="1"/>
+      <text x="98" y="201.5" textLength="129.2" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="14.5" font-weight="500" fill="#2A323B">Cloudflare Workers</text>
+      <rect x="252.192529296875" y="178" width="132.6" height="36" rx="18.0" fill="#FFFFFF" stroke="#D5DCE3" stroke-width="1"/>
+      <text x="268.192529296875" y="201.5" textLength="100.6" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="14.5" font-weight="500" fill="#2A323B">GitHub Actions</text>
+      <rect x="393.79931640625" y="178" width="108.0" height="36" rx="18.0" fill="#FFFFFF" stroke="#D5DCE3" stroke-width="1"/>
+      <text x="409.79931640625" y="201.5" textLength="76.0" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="14.5" font-weight="500" fill="#2A323B">PowerShell</text>
+      <rect x="510.841845703125" y="178" width="122.6" height="36" rx="18.0" fill="#FFFFFF" stroke="#D5DCE3" stroke-width="1"/>
+      <text x="526.841845703125" y="201.5" textLength="90.6" font-family="system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="14.5" font-weight="500" fill="#2A323B">Microsoft 365</text>
+</svg>

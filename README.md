@@ -1,4 +1,10 @@
-![banner](./assets/GITBANNER.png)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/banner-light.svg">
+    <img src="./assets/banner-light.svg" alt="Yameen Bux — Senior IT Infrastructure Engineer, Cloud &amp; DevOps. Cloudflare Workers, GitHub Actions, PowerShell, Microsoft 365." width="100%">
+  </picture>
+</p>
 
 # 👋 Hi, I'm Yameen Bux
 
