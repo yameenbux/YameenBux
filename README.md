@@ -1,9 +1,10 @@
 <p align="center">
   <a href="https://yameenbux.github.io/ysbdesignsportfolio/">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="./assets/banner-light.svg">
-      <img src="./assets/banner-light.svg" alt="Yameen Bux — Senior IT Infrastructure Engineer. Cloud &amp; DevOps: production systems, shipped and running. Cloudflare Workers, GitHub Actions, PowerShell, Microsoft 365." width="100%">
+      <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/banner-dark-static.png">
+      <source media="(prefers-reduced-motion: reduce)" srcset="./assets/banner-light-static.png">
+      <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.png">
+      <img src="./assets/banner-light.png" alt="Yameen Bux — Senior IT Infrastructure Engineer. Cloud &amp; DevOps: production systems, shipped and running. Cloudflare Workers, GitHub Actions, PowerShell, Microsoft 365." width="100%">
     </picture>
   </a>
 </p>

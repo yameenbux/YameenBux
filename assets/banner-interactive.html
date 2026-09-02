@@ -291,12 +291,12 @@
 
   <div class="note">
     <h2>Why the README version can't do this</h2>
-    <p>GitHub serves README images through its camo proxy and renders them in an <code>&lt;img&gt;</code>.
-      A browser loads SVG there in <em>secure animated mode</em>: declarative CSS animation runs, but
-      scripting is disabled and pointer events never reach the image. So the shipped banner keeps every
-      animation on this page and drops only the cursor response — the one thing that needs a live document.</p>
+    <p>GitHub renders README images in an <code>&lt;img&gt;</code>, and pointer events never reach an
+      image — whatever the format. The shipped banner is an animated PNG: it plays the entrance once
+      and rests, so it keeps the motion from this page and drops only the cursor response, the one
+      thing that needs a live document.</p>
     <p>Inside a README the achievable maximum is an animated banner wrapped in a link, which is what
-      <code>assets/banner-dark.svg</code> and <code>assets/banner-light.svg</code> do. This file is
+      <code>assets/banner-dark.png</code> and <code>assets/banner-light.png</code> do. This file is
       standalone: drop it on any page you control — a GitHub Pages site, for instance — and the full
       interaction layer works.</p>
   </div>
