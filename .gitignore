@@ -19,3 +19,6 @@ Thumbs.db
 # Python bytecode, generated when a skill's scripts run
 __pycache__/
 *.py[cod]
+
+# Tool logs, written into whatever directory the CLI is run from
+vibe-session.log
