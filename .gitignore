@@ -22,3 +22,6 @@ __pycache__/
 
 # Tool logs, written into whatever directory the CLI is run from
 vibe-session.log
+
+# Firecrawl working directory: scraped pages and job state, not project content
+.firecrawl/
